@@ -1,0 +1,603 @@
+-- phpMyAdmin SQL Dump
+-- version 4.8.3
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Jan 17, 2019 at 02:53 PM
+-- Server version: 10.1.36-MariaDB
+-- PHP Version: 7.1.23
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `poxaapp`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admins`
+--
+
+CREATE TABLE `admins` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `job_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `admins`
+--
+
+INSERT INTO `admins` (`id`, `name`, `email`, `job_title`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Deepesh Kumar', 'deepesh@webplanet.co.in', 'Supper Admin', '$2y$10$s5d3nf4rVhI.uvw/4ldWoehJYkbJnax44kArbTuXlVmO7rvl.aYaC', 'wGLA8FJxIrGWlWrbkVZA3ciZgG3QLOXr5niWcBzbQrkAGtMGPfoZ5jDPUQp5', '2018-11-20 02:43:21', '2018-11-21 06:57:13');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `auctions`
+--
+
+CREATE TABLE `auctions` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `start_time` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `end_time` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `price_inc` double(8,2) DEFAULT '0.00',
+  `time_inc` int(10) UNSIGNED DEFAULT '0',
+  `min_real_bids` int(10) UNSIGNED DEFAULT '0',
+  `autobid_limit` int(10) UNSIGNED DEFAULT '0',
+  `auction_status` tinyint(1) DEFAULT '1' COMMENT '1:Live',
+  `status` tinyint(1) DEFAULT '0' COMMENT '0:De-active; 1:Active',
+  `is_sold` tinyint(1) DEFAULT '0' COMMENT '1:solded',
+  `is_delete` tinyint(1) DEFAULT '1' COMMENT '0:Deleted; 1:Not Deleted',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `is_expired` tinyint(1) DEFAULT '1' COMMENT '0:Expired; 1:Not Expired'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `auctions`
+--
+
+INSERT INTO `auctions` (`id`, `product_id`, `start_time`, `end_time`, `price_inc`, `time_inc`, `min_real_bids`, `autobid_limit`, `auction_status`, `status`, `is_sold`, `is_delete`, `created_at`, `updated_at`, `is_expired`) VALUES
+(3, 1, '1545127663', '1545214063', 0.01, 20, 20, 10, 1, 0, 1, 1, '2018-12-17 23:38:11', '2018-12-19 00:02:11', 1),
+(4, 2, '1545127729', '1545217200', 0.01, 20, 20, 10, 1, 1, 0, 1, '2018-12-17 23:39:12', '2018-12-19 00:24:25', 0),
+(5, 3, '1545309083', '1545499883', 0.01, 20, 20, 10, 1, 0, 0, 1, '2018-12-18 02:02:00', '2018-12-24 20:39:52', 0),
+(6, 4, '1545730557', '1546162557', 0.01, 20, 20, 10, 1, 1, 0, 1, '2018-12-18 23:06:18', '2018-12-18 23:06:18', 1),
+(7, 9, '1546177037', '1546263437', 0.01, 20, 20, 10, 1, 1, 0, 1, '2018-12-26 03:07:42', '2018-12-26 03:43:04', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `auto_bidders`
+--
+
+CREATE TABLE `auto_bidders` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(1) DEFAULT '1' COMMENT '0:De-active; 1:Active',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bidding_packages`
+--
+
+CREATE TABLE `bidding_packages` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` double(8,2) DEFAULT '0.00',
+  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '0:Inactive; 1:Active',
+  `is_delete` tinyint(1) NOT NULL DEFAULT '1' COMMENT '0:Deleted; 1:Not Deleted',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `number_of_bids` int(11) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `bidding_packages`
+--
+
+INSERT INTO `bidding_packages` (`id`, `name`, `price`, `status`, `is_delete`, `created_at`, `updated_at`, `number_of_bids`) VALUES
+(1, 'Silver', 500.00, 1, 1, '2018-11-21 08:50:47', '2018-11-30 02:30:05', 200);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `biding_histories`
+--
+
+CREATE TABLE `biding_histories` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `auction_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `username` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `price` float(8,2) NOT NULL,
+  `is_winner` tinyint(1) DEFAULT '0' COMMENT '1:winner',
+  `bid_type` tinyint(1) DEFAULT '1' COMMENT '0:Auto Bid; 1:Bid',
+  `status` tinyint(1) DEFAULT '1' COMMENT '0:De-active; 1:Active',
+  `is_delete` tinyint(1) DEFAULT '1' COMMENT '0:Deleted; 1:Not Deleted',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `biding_histories`
+--
+
+INSERT INTO `biding_histories` (`id`, `product_id`, `auction_id`, `user_id`, `username`, `price`, `is_winner`, `bid_type`, `status`, `is_delete`, `created_at`, `updated_at`) VALUES
+(33, 1, 3, 3, 'Webplanet', 450.54, 1, 1, 1, 1, '2018-12-17 23:42:33', '2018-12-19 00:02:11');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `parent_id` int(11) NOT NULL,
+  `meta_description` text COLLATE utf8mb4_unicode_ci,
+  `meta_keywords` text COLLATE utf8mb4_unicode_ci,
+  `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `featured` tinyint(1) DEFAULT '0',
+  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '0:Inactive; 1:Active',
+  `is_delete` tinyint(1) NOT NULL DEFAULT '1' COMMENT '0:Deleted; 1:Not Deleted',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `parent_id`, `meta_description`, `meta_keywords`, `image`, `featured`, `status`, `is_delete`, `created_at`, `updated_at`) VALUES
+(1, 'Home, Kitchen, Pets', 0, 'Home, Kitchen, Pets', 'Home, Kitchen, Pets', '1542804747.jpg', 1, 1, 1, '2018-11-21 07:22:27', '2018-11-21 07:22:27');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(1, '2014_10_12_000000_create_users_table', 1),
+(2, '2014_10_12_100000_create_password_resets_table', 1),
+(3, '2018_11_20_061745_create_admins_table', 1),
+(4, '2018_11_19_132750_create_auctions_table', 2),
+(5, '2018_11_19_132750_create_auto_bidders_table', 2),
+(6, '2018_11_19_132750_create_biding_histories_table', 2),
+(7, '2018_11_19_132750_create_categories_table', 2),
+(8, '2018_11_19_132750_create_product_images_table', 2),
+(9, '2018_11_19_132750_create_products_table', 2),
+(10, '2018_11_19_132752_add_foreign_keys_to_auctions_table', 2),
+(11, '2018_11_19_132752_add_foreign_keys_to_biding_histories_table', 2),
+(12, '2018_11_19_132752_add_foreign_keys_to_product_images_table', 2),
+(13, '2018_11_17_125043_status_to_users_table', 3),
+(14, '2018_11_17_132305_is_auto_to_users_table', 3),
+(15, '2018_11_17_134645_is_delete_to_users_table', 3),
+(16, '2018_11_21_131611_create_biding_packages_table', 4),
+(17, '2018_11_23_070323_add_slug_to_products_table', 5),
+(18, '2018_11_23_071201_add_unique_index_to_slug_col_in_products_table', 6),
+(19, '2018_11_23_074514_add_unique_index_to_product_name_col_in_products_table', 7),
+(20, '2018_11_27_062322_create_user_packages_table', 8),
+(21, '2018_11_27_074116_add_bids_to_users_table', 9),
+(22, '2018_11_29_022456_add_username_to_biding_histories_table', 10),
+(23, '2018_11_29_051510_add_is_expired_to_auctions_table', 11),
+(24, '2018_11_30_071025_add_number_of_bids_to_bidding_packages_table', 12),
+(25, '2018_12_01_024939_create_sellers_table', 13);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_resets`
+--
+
+CREATE TABLE `password_resets` (
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `password_resets`
+--
+
+INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
+('deepesh@webplanet.co.in', '$2y$10$LM/Flram0c2kR0yih059xuYfLPUdBlLhbUeyAQJVKUqfWTspxyLhK', '2018-11-27 07:47:50'),
+('deepeshwebplanet@gmail.com', '$2y$10$0.OGhDXpdLe6T7FdxH9wsedEo4wKWjXQbjKhfll827LBMFcxOTv..', '2018-12-27 01:52:43');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `product_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `product_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci,
+  `price` double(8,2) NOT NULL,
+  `winer_user_id` int(11) DEFAULT NULL COMMENT 'winner user id',
+  `buy_now_price` double(8,2) DEFAULT NULL,
+  `meta_description` text COLLATE utf8mb4_unicode_ci,
+  `meta_keywords` text COLLATE utf8mb4_unicode_ci,
+  `status` tinyint(1) DEFAULT '1' COMMENT '0:De-active; 1:Active',
+  `is_delete` tinyint(1) DEFAULT '1' COMMENT '0:Deleted; 1:Not Deleted',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `category_id`, `product_name`, `slug`, `product_code`, `description`, `price`, `winer_user_id`, `buy_now_price`, `meta_description`, `meta_keywords`, `status`, `is_delete`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Milton Marvel Casserole 1500ml, Yellow', 'milton-marvel-casserole-1500ml-yellow', '1542804777', 'Milton Marvel Casserole 1500ml, Yellow', 0.01, 3, 800.00, 'Milton Marvel Casserole 1500ml, Yellow', 'Milton Marvel Casserole 1500ml, Yellow', 1, 1, '2018-11-21 07:23:59', '2018-12-19 00:02:11'),
+(2, 1, 'Havells Mixer Juicer Grinding machine Blender', 'havells-mixer-juicer-grinding-machine-blender', '456789', 'Havells Mixer Juicer Grinding machine Blender', 582.23, NULL, 1000.00, 'Havells Mixer Juicer Grinding machine Blender', 'Havells Mixer Juicer Grinding machine Blender', 1, 1, '2018-11-22 07:04:57', '2018-12-17 23:21:17'),
+(3, 1, 'Electric water boiler Electricity Stainless steel', 'electric-water-boiler-electricity-stainless-steel', '58632', 'Electric kettle Electric water boiler Electricity Stainless steel', 509.30, NULL, 900.00, 'Electric kettle Electric water boiler Electricity Stainless steel', 'Electric kettle Electric water boiler Electricity Stainless steel', 1, 1, '2018-11-22 07:11:22', '2018-11-23 02:27:11'),
+(4, 1, 'India Havells Mixer Grinding machine Juicer', 'india-havells-mixer-grinding-machine-juicer', '784623', 'India Havells Mixer Grinding machine Juicer', 400.00, NULL, 800.00, 'India Havells Mixer Grinding machine Juicer', 'India Havells Mixer Grinding machine Juicer', 1, 1, '2018-11-22 07:16:04', '2018-11-23 02:27:19'),
+(5, 1, 'Mixer Blender Juicer Kitchen', 'mixer-blender-juicer-kitchen', '8512364', 'Mixer Blender Juicer Kitchen - juice blender', 500.00, NULL, 950.00, 'Mixer Blender Juicer Kitchen - juice blender', 'Mixer Blender Juicer Kitchen - juice blender', 1, 1, '2018-11-22 07:18:56', '2018-11-23 02:27:25'),
+(7, 1, 'Milton Marvel Casserole 1500ml, Yellow', 'milton-marvel-casserole-1500ml-yellow', '1542804777', 'Milton Marvel Casserole 1500ml, Yellow', 450.53, NULL, 800.00, 'Milton Marvel Casserole 1500ml, Yellow', 'Milton Marvel Casserole 1500ml, Yellow', 1, 1, '2018-12-03 03:35:31', '2018-12-03 03:35:31'),
+(8, 1, 'India Havells Mixer Grinding machine Juicer', 'india-havells-mixer-grinding-machine-juicer', '784623', 'India Havells Mixer Grinding machine Juicer', 400.00, NULL, 800.00, 'India Havells Mixer Grinding machine Juicer', 'India Havells Mixer Grinding machine Juicer', 1, 1, '2018-12-03 21:18:16', '2018-12-03 21:18:16'),
+(9, 1, 'Electric water boiler Electricity Stainless steel', 'electric-water-boiler-electricity-stainless-steel', '58632', 'Electric kettle Electric water boiler Electricity Stainless steel', 509.36, NULL, 900.00, 'Electric kettle Electric water boiler Electricity Stainless steel', 'Electric kettle Electric water boiler Electricity Stainless steel', 1, 1, '2018-12-17 23:37:30', '2018-12-26 03:43:04');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_images`
+--
+
+CREATE TABLE `product_images` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `image_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(1) DEFAULT '1' COMMENT '0:De-active; 1:Active',
+  `is_delete` tinyint(1) DEFAULT '1' COMMENT '0:Deleted; 1:Not Deleted',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `product_images`
+--
+
+INSERT INTO `product_images` (`id`, `product_id`, `image_name`, `status`, `is_delete`, `created_at`, `updated_at`) VALUES
+(1, 1, '1542805113.jpg', 1, 1, '2018-11-21 07:28:34', '2018-11-21 07:28:34'),
+(3, 1, '1542890241.png', 1, 1, '2018-11-22 07:07:22', '2018-11-22 07:07:22'),
+(4, 2, '1542890433.png', 1, 1, '2018-11-22 07:10:34', '2018-11-22 07:10:34'),
+(6, 3, '1542890635.png', 1, 1, '2018-11-22 07:13:56', '2018-11-22 07:13:56'),
+(7, 4, '1542890781.png', 1, 1, '2018-11-22 07:16:23', '2018-11-22 07:16:23'),
+(8, 5, '1542890971.png', 1, 1, '2018-11-22 07:19:32', '2018-11-22 07:19:32'),
+(9, 7, '1542890241.png', 1, 1, '2018-12-03 03:35:31', '2018-12-03 03:35:31'),
+(10, 8, '1542890781.png', 1, 1, '2018-12-03 21:18:16', '2018-12-03 21:18:16'),
+(11, 9, '1542890635.png', 1, 1, '2018-12-17 23:37:30', '2018-12-17 23:37:30');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sellers`
+--
+
+CREATE TABLE `sellers` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `status` tinyint(4) DEFAULT '1' COMMENT '1:Active; 0:De-Active',
+  `is_auto` tinyint(4) DEFAULT '0' COMMENT '1:Auto Bidder; 0:Not Auto Bidder',
+  `is_delete` tinyint(4) DEFAULT '1' COMMENT '0:Deleted; 1:Not Deleted',
+  `bids` int(11) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`, `status`, `is_auto`, `is_delete`, `bids`) VALUES
+(1, 'Raja', 'deepeshwebplanet@gmail.com', '$2y$10$HvHtwe9upddKCIPTdi3CHOEgSMdGbXNtSxMmrCvC4qU9FpkWt.Kv2', 'uX8Zyo0JAte38tPG7SGIllLLb32ZZACPndgFFndmcGoNZtMuiJi9hmWvfXwM', '2018-11-20 01:17:48', '2018-12-28 03:43:11', 1, 0, 1, 42),
+(2, 'Autobidder', 'autobidder1@poxaapp.com', '$2y$10$mDgWn7QdGJHsdtnDY5vmS.q/4sf2ymCtCen37QHttHUpNtRDPfHHO', NULL, '2018-11-21 07:33:07', '2018-11-21 07:33:20', 1, 1, 1, 0),
+(3, 'Webplanet', 'deepesh@webplanet.co.in', '$2y$10$HvHtwe9upddKCIPTdi3CHOEgSMdGbXNtSxMmrCvC4qU9FpkWt.Kv2', 'tm6nMgF628ih0OFSdq8jr7w6NQLq6RODtPLy1zG07ijrKK6V0MJCguJY82QE', '2018-11-22 08:14:56', '2018-12-26 03:43:04', 1, 0, 1, 10000),
+(4, 'deepesh', 'deepesh@gmail.com', '$2y$10$v8G3AFrcIMm5P2GobkgvZuZizHtba6R0rWIcHhAIhZ5/UaA5fHKsq', 'YJcgcEqCavHeW5SR12Yd9qrdEkwAGpQqHzvQnSVPTNiXCAU1sA7RMUASatcJ', '2018-12-26 00:30:51', '2018-12-26 00:30:51', 1, 0, 1, 0),
+(5, 'sfsadfsdf', 'deepesh123@gmail.com', '$2y$10$cDC4bx4FLRz1wVanaIFGiODvHAVeL3FQ2f/B1RztmAvz2QpS3RNMG', '1koIoD39RtNMc3b0KdM6JRNRBGd50YfzhXET2v1luR12976JCiW06hjuDWGG', '2018-12-26 00:58:41', '2018-12-28 03:29:58', 1, 0, 0, 0),
+(6, 'deepesh', 'deepesh5@gmail.com', '$2y$10$2PY7vbm1.IG2LKXa3uxsGOnavAhKmOKmc2AlR8gm2LK03Qw2FgDbK', 'bF3VRhc2jwbgSh9w8xMxTBNCsIDivNkA28CmwGbWFIDYumSYqUs6bcJCjcd8', '2018-12-26 01:22:50', '2018-12-26 01:22:50', 1, 0, 1, 0),
+(7, 'deepesh', 'deepesh85@gmail.com', '$2y$10$3xW3iBTDRAkfhqsnQTqRIO.7oy3sTwjmJCM5CfsGBHGyP.o.XoAsm', 'tzEEAXi3xI44CgyD9UdqkMR8MHMq1yluIYhlV3CHOu99cp0d8Qw0KQQeoLgJ', '2018-12-26 01:26:05', '2018-12-26 01:26:05', 1, 0, 1, 0),
+(8, 'vikash', 'vikash@gmail.com', '$2y$10$7x.NPmvqNcv1LRqugSxAjO7ZipI81qk38AOYgiHyyKULnYrNFlnD2', 'JyZEk0q7ChUGxShSmAk8Nucb4k2tB0Qf6jDZLz111ToGzhavG2flq1yJQgXD', '2018-12-26 02:32:35', '2018-12-26 02:32:35', 1, 0, 1, 0),
+(9, 'rajeev', 'rajeev@gmail.ocm', '$2y$10$WbgYbdey4kdRzxRzARP5BeKmPrHbikha2DIXqBFMnKFOj1Y/KrMQa', 'zpo3Ur5wX84ZckMPxpcWAtPVBzGIaXmXUyNPuqffIDwwLFQeTwb4a8yZe5B2', '2018-12-26 02:38:14', '2018-12-26 02:38:14', 1, 0, 1, 0),
+(10, 'akarsh', 'akarsh@gmail.com', '$2y$10$.YFUp1N73OB.8jtDlyDHA.ixwTBmjR0l4.sMz/0QuLBmTyoQArDzO', 'OPZB1es2XLpoSeHZASLiKOh54kv8KOxyhuI1NhsHeac0TIFYI2jL7lQp6zfA', '2018-12-26 02:41:28', '2018-12-28 03:32:01', 1, 0, 0, 0),
+(11, 'Deepesh', 'aeepesh@gmail.com', '$2y$10$us7oLE7.8xdzQQV2zguHBeLoOur5ihFfwxLdYeNkNcXlTiSvLmJ6q', 'e38gfpc6DGhZsbORqd82TdY9DVRmcKQr36oPtQ2isFaX46zkwp4A9C4mQ1c5', '2018-12-26 02:42:31', '2018-12-26 02:42:31', 1, 0, 1, 0),
+(12, 'amit', 'amit@gmail.com', '$2y$10$FkSunjOgdXcbCqqz3XDCAOmM9BRQNpfKK6auccxoafi/BEyxIh/QG', '5tWuZO5J9cSRa1sxPZYYbotr1FmwilJ1IE2q9HX8500zCzeKGVmgu2P2x86V', '2018-12-26 02:46:32', '2018-12-26 02:46:32', 1, 0, 1, 0),
+(13, 'deepesh', 'deepesh8989@gmail.com', '$2y$10$zNmnw3pJHPh3neSdRF5JkuuDk08920856nWKtfH4Ma8E64k9NplMe', NULL, '2018-12-26 02:47:54', '2018-12-26 02:47:54', 1, 0, 1, 0),
+(14, 'deepesh', 'kumar@gmail.com', '$2y$10$HrzoW.g8CSzWbSKEUi71dutWhmhjT5wh7bnrL3JtLkUxxFnOkCZ4m', 'ScbFTfu0wOmw51hD7B6HFj1puWR31QeEBMwGaZbgLg5RcE24kJYpQoCUZruB', '2018-12-26 02:49:12', '2018-12-26 02:49:12', 1, 0, 1, 0),
+(15, 'ADas', 'as@gmail.com', '$2y$10$up9sUPKuaxZsZhVeCgwnvOhQuZKQxX3RqpW8hX2sFJ5ftpP6L10Hq', 'GJChTkWcZ0TW9Ugrt8kFugEpYPC9Z7W7O7I71HZwkbTAI65XTg3vaejoO9E0', '2018-12-26 03:05:57', '2018-12-26 03:05:57', 1, 0, 1, 0),
+(16, 'Om', 'autobidder15@poxaapp.com', '$2y$10$ux5Yep6oz65/8LNuNshWWOUIVIGeGa9E69p.YmD8p68GhdT4H7jAK', NULL, '2018-12-28 03:55:52', '2018-12-28 03:55:52', 1, 1, 1, 0),
+(17, 'Om', 'autobidder16@poxaapp.com', '$2y$10$EbFsqKduALSv8rKoZIgp8uh/RpjTMy1Tiv8p51qgqQJR6QHrXMFBm', NULL, '2018-12-28 03:57:20', '2018-12-28 03:57:20', 1, 1, 1, 0),
+(18, 'ramkumar', 'ramkumar@gmail.com', '$2y$10$mb.6xqDbjhw9TSeTSbsWnON.UFIj.Q1NnzI5i6Vs7/4TrtcNnDUkS', NULL, '2018-12-28 04:01:38', '2018-12-28 04:01:38', 1, 0, 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_packages`
+--
+
+CREATE TABLE `user_packages` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `bidding_package_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL COMMENT 'user id',
+  `transaction_id` int(11) DEFAULT NULL COMMENT 'Transaction Id',
+  `payment_status` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Payment Status',
+  `payment_amount` double(8,2) DEFAULT '0.00',
+  `payment_currency` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Payment Currency',
+  `payer_email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Payer Email',
+  `receiver_email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Receiver Email',
+  `invoice_number` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Invoice Number',
+  `ipaddress` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'IP Address',
+  `download_status` tinyint(1) DEFAULT '0' COMMENT '0:Not Downloaded; 1:Downloaded',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `admins`
+--
+ALTER TABLE `admins`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `admins_email_unique` (`email`);
+
+--
+-- Indexes for table `auctions`
+--
+ALTER TABLE `auctions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `auctions_product_id_foreign` (`product_id`);
+
+--
+-- Indexes for table `auto_bidders`
+--
+ALTER TABLE `auto_bidders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `bidding_packages`
+--
+ALTER TABLE `bidding_packages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `biding_histories`
+--
+ALTER TABLE `biding_histories`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `auction_id` (`auction_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `username` (`username`);
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_images`
+--
+ALTER TABLE `product_images`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `products_image_product_id_foreign` (`product_id`);
+
+--
+-- Indexes for table `sellers`
+--
+ALTER TABLE `sellers`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `sellers_email_unique` (`email`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`),
+  ADD KEY `bids_count` (`bids`);
+
+--
+-- Indexes for table `user_packages`
+--
+ALTER TABLE `user_packages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `bidding_package_id_foreign` (`bidding_package_id`),
+  ADD KEY `user_id_foreign` (`user_id`),
+  ADD KEY `transaction_id` (`transaction_id`),
+  ADD KEY `payment_status` (`payment_status`),
+  ADD KEY `payment_currency` (`payment_currency`),
+  ADD KEY `payer_email` (`payer_email`),
+  ADD KEY `receiver_email` (`receiver_email`),
+  ADD KEY `invoice_number` (`invoice_number`),
+  ADD KEY `ipaddress` (`ipaddress`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `admins`
+--
+ALTER TABLE `admins`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `auctions`
+--
+ALTER TABLE `auctions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `auto_bidders`
+--
+ALTER TABLE `auto_bidders`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `bidding_packages`
+--
+ALTER TABLE `bidding_packages`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `biding_histories`
+--
+ALTER TABLE `biding_histories`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `product_images`
+--
+ALTER TABLE `product_images`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `sellers`
+--
+ALTER TABLE `sellers`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `user_packages`
+--
+ALTER TABLE `user_packages`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `auctions`
+--
+ALTER TABLE `auctions`
+  ADD CONSTRAINT `auctions_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `biding_histories`
+--
+ALTER TABLE `biding_histories`
+  ADD CONSTRAINT `biding_histories_auction_id_foreign` FOREIGN KEY (`auction_id`) REFERENCES `auctions` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `biding_histories_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `biding_histories_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `product_images`
+--
+ALTER TABLE `product_images`
+  ADD CONSTRAINT `products_image_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `user_packages`
+--
+ALTER TABLE `user_packages`
+  ADD CONSTRAINT `user_packages_bidding_package_id_foreign` FOREIGN KEY (`bidding_package_id`) REFERENCES `bidding_packages` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `user_packages_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
