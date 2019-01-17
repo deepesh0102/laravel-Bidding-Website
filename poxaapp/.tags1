@@ -1,0 +1,33 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	0	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ProductController	D:\xampp\htdocs\poxaapp\app\Http\Controllers\front\ProductController.php	/^class ProductController extends Controller$/;"	class	line:18
+listProducts	D:\xampp\htdocs\poxaapp\app\Http\Controllers\front\ProductController.php	/^  public function listProducts(int $limit=null)$/;"	function	line:31
+limit	D:\xampp\htdocs\poxaapp\app\Http\Controllers\front\ProductController.php	/^  public function listProducts(int $limit=null)$/;"	variable	line:31
+products	D:\xampp\htdocs\poxaapp\app\Http\Controllers\front\ProductController.php	/^    \/\/        $products =Product::has('auctions')->get()->take($limit);$/;"	variable	line:35
+products	D:\xampp\htdocs\poxaapp\app\Http\Controllers\front\ProductController.php	/^    $products =Product::whereHas('auctions', function ($query) {$/;"	variable	line:36
+upComingProduct	D:\xampp\htdocs\poxaapp\app\Http\Controllers\front\ProductController.php	/^public function upComingProduct(int $limit=null){$/;"	function	line:54
+limit	D:\xampp\htdocs\poxaapp\app\Http\Controllers\front\ProductController.php	/^public function upComingProduct(int $limit=null){$/;"	variable	line:54
+current_time_stamp	D:\xampp\htdocs\poxaapp\app\Http\Controllers\front\ProductController.php	/^  $current_time_stamp = new \\DateTime();$/;"	variable	line:56
+current_time_stamp	D:\xampp\htdocs\poxaapp\app\Http\Controllers\front\ProductController.php	/^  $current_time_stamp = $current_time_stamp->getTimestamp();$/;"	variable	line:58
+products	D:\xampp\htdocs\poxaapp\app\Http\Controllers\front\ProductController.php	/^  $products =Product::whereHas('auctions', function ($query) use ($current_time_stamp){$/;"	variable	line:60
+index	D:\xampp\htdocs\poxaapp\app\Http\Controllers\front\ProductController.php	/^public function index()$/;"	function	line:103
+current_time_stamp	D:\xampp\htdocs\poxaapp\app\Http\Controllers\front\ProductController.php	/^  $current_time_stamp = new \\DateTime();$/;"	variable	line:105
+current_time_stamp	D:\xampp\htdocs\poxaapp\app\Http\Controllers\front\ProductController.php	/^  $current_time_stamp = $current_time_stamp->getTimestamp();$/;"	variable	line:107
+products	D:\xampp\htdocs\poxaapp\app\Http\Controllers\front\ProductController.php	/^  $products =$this->listProducts();$/;"	variable	line:109
+products_collection	D:\xampp\htdocs\poxaapp\app\Http\Controllers\front\ProductController.php	/^  $products_collection = $products->pluck('id')->all();$/;"	variable	line:132
+productId	D:\xampp\htdocs\poxaapp\app\Http\Controllers\front\ProductController.php	/^  $productId = $products_collection;$/;"	variable	line:134
+products	D:\xampp\htdocs\poxaapp\app\Http\Controllers\front\ProductController.php	/^  \/\/        $products = $products->attributes;$/;"	variable	line:136
+show	D:\xampp\htdocs\poxaapp\app\Http\Controllers\front\ProductController.php	/^\/\/    public function show(array $ids)$/;"	function	line:148
+show	D:\xampp\htdocs\poxaapp\app\Http\Controllers\front\ProductController.php	/^public function show(Request $request, $id, $slug)$/;"	function	line:149
+current_time_stamp	D:\xampp\htdocs\poxaapp\app\Http\Controllers\front\ProductController.php	/^  $current_time_stamp = new \\DateTime();$/;"	variable	line:152
+current_time_stamp	D:\xampp\htdocs\poxaapp\app\Http\Controllers\front\ProductController.php	/^  $current_time_stamp = $current_time_stamp->getTimestamp();$/;"	variable	line:154
+product	D:\xampp\htdocs\poxaapp\app\Http\Controllers\front\ProductController.php	/^  \/\/        $product = Product::where(['slug' => $slug])->get();$/;"	variable	line:155
+listproducts	D:\xampp\htdocs\poxaapp\app\Http\Controllers\front\ProductController.php	/^  $listproducts = $this->listProducts(3);$/;"	variable	line:156
+products	D:\xampp\htdocs\poxaapp\app\Http\Controllers\front\ProductController.php	/^  $products = Product::with([$/;"	variable	line:157
+products_collection	D:\xampp\htdocs\poxaapp\app\Http\Controllers\front\ProductController.php	/^    $products_collection = collect($products);$/;"	variable	line:178
+products_collection	D:\xampp\htdocs\poxaapp\app\Http\Controllers\front\ProductController.php	/^    $products_collection = $products_collection->only('id')->values()->all();$/;"	variable	line:179
+productId	D:\xampp\htdocs\poxaapp\app\Http\Controllers\front\ProductController.php	/^    $productId = $products_collection;$/;"	variable	line:180

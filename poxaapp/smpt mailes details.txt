@@ -1,0 +1,31 @@
+................................smtp details for development mailtrap.io...................................................
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=2da5cbb9e7858f
+MAIL_PASSWORD=c8b2f8ee731c31
+MAIL_ENCRYPTION=null
+............................................................................................................................
+
+...............................................production sendgrid account details..........................................
+
+sendgrid password
+username: deepeshkumar
+password : De#9452886119
+
+
+https://sendgrid.com/docs/API_Reference/SMTP_API/integrating_with_the_smtp_api.html
+
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.sendgrid.net
+MAIL_PORT=2525
+MAIL_USERNAME=deepeshkumar
+MAIL_PASSWORD=De#9452886119
+MAIL_ENCRYPTION=null
+
+...............................................production sendgrid account details..........................................
+hello@jacurtis.com
+hello@devmarketer.io
+
+
+series on multi-user authentication in Laravel

@@ -1,0 +1,11 @@
+
+>>php artisan serve
+
+>>php artisan make:auth
+
+>>php artisan make:controller 
+
+maximize cmd
+
+>>wmic
+>>exit

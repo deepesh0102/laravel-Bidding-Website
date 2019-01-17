@@ -1,0 +1,300 @@
+|        | GET|HEAD | admin/password/reset/{token} | admin.password.reset   | App\Http\Controllers\Auth\AdminResetPasswordController@showResetForm        | web,guest:admin |
+|        | GET|HEAD | api/user                     |                        | Closure                                                                     | api,auth:api    |
+|        | GET|HEAD | home                         | home                   | App\Http\Controllers\HomeController@index                                   | web,auth        |
+|        | POST     | login                        |                        | App\Http\Controllers\Auth\LoginController@login                             | web,guest       |
+|        | GET|HEAD | login                        | login                  | App\Http\Controllers\Auth\LoginController@showLoginForm                     | web,guest       |
+|        | POST     | logout                       | logout                 | App\Http\Controllers\Auth\LoginController@logout                            | web             |
+|        | POST     | password/email               | password.email         | App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail       | web,guest       |
+|        | GET|HEAD | password/reset               | password.request       | App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm      | web,guest       |
+|        | POST     | password/reset               |                        | App\Http\Controllers\Auth\ResetPasswordController@reset                     | web,guest       |
+|        | GET|HEAD | password/reset/{token}       | password.reset         | App\Http\Controllers\Auth\ResetPasswordController@showResetForm             | web,guest       |
+|        | POST     | register                     |                        | App\Http\Controllers\Auth\RegisterController@register                       | web,guest       |
+|        | GET|HEAD | register                     | register               | App\Http\Controllers\Auth\RegisterController@showRegistrationForm           | web,guest       |
+|        | GET|HEAD | users/logout                 | user.logout            | App\Http\Controllers\Auth\LoginController@userLogout                        | web             |
++--------+----------+------------------------------+------------------------+-----------------------------------------------------------------------------+-----------------+
+
+D:\xampp\htdocs\poxaapp>php artisan r:l
++--------+---------------+--------------------------------------------------------+-------------------------------+-----------------------------------------------------------------------------+---------------------+
+| Domain | Method        | URI                                                    | Name                          | Action                                                                      | Middleware          |
++--------+---------------+--------------------------------------------------------+-------------------------------+-----------------------------------------------------------------------------+---------------------+
+|        | GET|HEAD      | /                                                      |                               | Closure                                                                     | web                 |
+|        | GET|HEAD      | admin                                                  | admin.dashboard               | App\Http\Controllers\AdminController@index                                  | web,auth:admin      |
+|        | GET|POST|HEAD | admin/auction/auction-winner/{product_id}/{auction_id} | auction.bidlistingByProduct   | App\Http\Controllers\AuctionController@winner                               | web,auth            |
+|        | GET|POST|HEAD | admin/auction/bid-listing                              | auction.bidlisting            | App\Http\Controllers\AuctionController@bidListing                           | web,auth            |
+|        | GET|HEAD      | admin/auction/live-auction-listing                     | auction.live_acuction         | App\Http\Controllers\AuctionController@liveAuctions                         | web,auth            |
+|        | GET|HEAD      | admin/auction/upcoming-auction-listing                 | auction.up_coming_acuction    | App\Http\Controllers\AuctionController@upComingAuctions                     | web,auth            |
+|        | GET|HEAD      | admin/auction/won-auction-listing                      | auction.won_acuction          | App\Http\Controllers\AuctionController@wonAuctions                          | web,auth            |
+|        | GET|POST|HEAD | admin/category/add-category                            | category.addcategory          | App\Http\Controllers\CategoryController@addCategory                         | web,auth            |
+|        | GET|POST|HEAD | admin/category/delete-category/{id}                    | category.deletecategory       | App\Http\Controllers\CategoryController@deleteCategory                      | web,auth            |
+|        | GET|POST|HEAD | admin/category/edit-category/{id}                      | category.editcategory         | App\Http\Controllers\CategoryController@editCategory                        | web,auth            |
+|        | GET|HEAD      | admin/category/list-categories                         | category.viewcategory         | App\Http\Controllers\CategoryController@viewCategories                      | web,auth            |
+|        | GET|HEAD      | admin/category/list-child-categories/{id}              | category.viewchildcategory    | App\Http\Controllers\CategoryController@viewChildCategories                 | web,auth            |
+|        | GET|POST|HEAD | admin/category/update-status-category/{id}/{status}    | category.updatestatuscategory | App\Http\Controllers\CategoryController@updatestatusCategory                | web,auth            |
+|        | GET|HEAD      | admin/dashboard                                        |                               | App\Http\Controllers\AdminController@dashboard                              | web,auth,auth:admin |
+|        | GET|HEAD      | admin/error404                                         |                               | App\Http\Controllers\AdminController@error404                               | web,auth,auth:admin |
+|        | GET|HEAD      | admin/login                                            | admin.login                   | App\Http\Controllers\Auth\AdminLoginController@showLoginForm                | web,guest:admin     |
+|        | POST          | admin/login                                            | admin.login.submit            | App\Http\Controllers\Auth\AdminLoginController@login                        | web,guest:admin     |
+|        | GET|HEAD      | admin/logout                                           | admin.logout                  | App\Http\Controllers\Auth\AdminLoginController@logout                       | web                 |
+|        | POST          | admin/password/email                                   | admin.password.email          | App\Http\Controllers\Auth\AdminForgotPasswordController@sendResetLinkEmail  | web,guest:admin     |
+|        | POST          | admin/password/reset                                   |                               | App\Http\Controllers\Auth\AdminResetPasswordController@reset                | web,guest:admin     |
+|        | GET|HEAD      | admin/password/reset                                   | admin.password.request        | App\Http\Controllers\Auth\AdminForgotPasswordController@showLinkRequestForm | web,guest:admin     |
+|        | GET|HEAD      | admin/password/reset/{token}                           | admin.password.reset          | App\Http\Controllers\Auth\AdminResetPasswordController@showResetForm        | web,guest:admin     |
+|        | GET|POST|HEAD | admin/product/add-auction/{id}                         | auction.store                 | App\Http\Controllers\AuctionController@store                                | web,auth            |
+|        | GET|POST|HEAD | admin/product/add-product                              | product.addproduct            | App\Http\Controllers\ProductsController@addProduct                          | web,auth            |
+|        | GET|POST|HEAD | admin/product/add-product-image/{id}                   | product.addproductimage       | App\Http\Controllers\ProductImageController@store                           | web,auth            |
+|        | GET|HEAD      | admin/product/auction-listing/{id}                     | auction.index                 | App\Http\Controllers\AuctionController@index                                | web,auth            |
+|        | GET|POST|HEAD | admin/product/delete-auction/{id}                      | auction.destroy               | App\Http\Controllers\AuctionController@destroy                              | web,auth            |
+|        | GET|POST|HEAD | admin/product/delete-product-image/{id}                | product.deleteproductimage    | App\Http\Controllers\ProductImageController@destroy                         | web,auth            |
+|        | GET|POST|HEAD | admin/product/delete-product/{id}                      | product.deleteproduct         | App\Http\Controllers\ProductsController@deleteProduct                       | web,auth            |
+|        | GET|POST|HEAD | admin/product/edit-auction/{auction_id}                | auction.update                | App\Http\Controllers\AuctionController@update                               | web,auth            |
+|        | GET|POST|HEAD | admin/product/edit-product/{id}                        | product.editproduct           | App\Http\Controllers\ProductsController@editProduct                         | web,auth            |
+|        | GET|HEAD      | admin/product/product-image-listing/{id}               | product.viewproductimage      | App\Http\Controllers\ProductImageController@index                           | web,auth            |
+|        | GET|HEAD      | admin/product/product-listing                          | product.viewproduct           | App\Http\Controllers\ProductsController@viewProducts                        | web,auth            |
+|        | GET|POST|HEAD | admin/product/update-status-product/{id}/{status}      | product.updatestatusproduct   | App\Http\Controllers\ProductsController@updatestatusProduct                 | web,auth            |
+|        | GET|POST|HEAD | admin/updatepassword                                   |                               | App\Http\Controllers\AdminController@updatepassword                         | web,auth,auth:admin |
+|        | GET|HEAD      | admin/users/add-autobidder                             | autobidder.create             | App\Http\Controllers\AutoBidderController@create                            | web,auth            |
+|        | POST          | admin/users/add-autobidder                             | autobidder.store              | App\Http\Controllers\AutoBidderController@store                             | web,auth            |
+|        | GET|HEAD      | admin/users/autobidder-listing                         | autobidder.index              | App\Http\Controllers\AutoBidderController@index                             | web,auth            |
+|        | GET|HEAD      | admin/users/delete-autobidder/{autobidder_id}          | autobidder.destroy            | App\Http\Controllers\AutoBidderController@destroy                           | web,auth            |
+|        | POST          | admin/users/edit-autobidder/{autobidder_id}            | autobidder.update             | App\Http\Controllers\AutoBidderController@update                            | web,auth            |
+|        | GET|HEAD      | admin/users/edit-autobidder/{autobidder_id}            | autobidder.edit               | App\Http\Controllers\AutoBidderController@edit                              | web,auth            |
+|        | GET|HEAD      | api/user                                               |                               | Closure                                                                     | api,auth:api        |
+|        | GET|HEAD      | home                                                   | home                          | App\Http\Controllers\HomeController@index                                   | web,auth            |
+|        | POST          | login                                                  |                               | App\Http\Controllers\Auth\LoginController@login                             | web,guest           |
+|        | GET|HEAD      | login                                                  | login                         | App\Http\Controllers\Auth\LoginController@showLoginForm                     | web,guest           |
+|        | POST          | logout                                                 | logout                        | App\Http\Controllers\Auth\LoginController@logout                            | web                 |
+|        | POST          | password/email                                         | password.email                | App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail       | web,guest           |
+|        | POST          | password/reset                                         |                               | App\Http\Controllers\Auth\ResetPasswordController@reset                     | web,guest           |
+|        | GET|HEAD      | password/reset                                         | password.request              | App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm      | web,guest           |
+|        | GET|HEAD      | password/reset/{token}                                 | password.reset                | App\Http\Controllers\Auth\ResetPasswordController@showResetForm             | web,guest           |
+|        | POST          | register                                               |                               | App\Http\Controllers\Auth\RegisterController@register                       | web,guest           |
+|        | GET|HEAD      | register                                               | register                      | App\Http\Controllers\Auth\RegisterController@showRegistrationForm           | web,guest           |
+|        | GET|HEAD      | users/logout                                           | user.logout                   | App\Http\Controllers\Auth\LoginController@userLogout                        | web                 |
++--------+---------------+--------------------------------------------------------+-------------------------------+-----------------------------------------------------------------------------+---------------------+
+
+D:\xampp\htdocs\poxaapp>php artisan r:l
++--------+---------------+--------------------------------------------------------+-------------------------------+-----------------------------------------------------------------------------+-----------------+
+| Domain | Method        | URI                                                    | Name                          | Action                                                                      | Middleware      |
++--------+---------------+--------------------------------------------------------+-------------------------------+-----------------------------------------------------------------------------+-----------------+
+|        | GET|HEAD      | /                                                      |                               | Closure                                                                     | web             |
+|        | GET|HEAD      | admin                                                  | admin.dashboard               | App\Http\Controllers\AdminController@index                                  | web,auth:admin  |
+|        | GET|POST|HEAD | admin/auction/auction-winner/{product_id}/{auction_id} | auction.bidlistingByProduct   | App\Http\Controllers\AuctionController@winner                               | web             |
+|        | GET|POST|HEAD | admin/auction/bid-listing                              | auction.bidlisting            | App\Http\Controllers\AuctionController@bidListing                           | web             |
+|        | GET|HEAD      | admin/auction/live-auction-listing                     | auction.live_acuction         | App\Http\Controllers\AuctionController@liveAuctions                         | web             |
+|        | GET|HEAD      | admin/auction/upcoming-auction-listing                 | auction.up_coming_acuction    | App\Http\Controllers\AuctionController@upComingAuctions                     | web             |
+|        | GET|HEAD      | admin/auction/won-auction-listing                      | auction.won_acuction          | App\Http\Controllers\AuctionController@wonAuctions                          | web             |
+|        | GET|POST|HEAD | admin/category/add-category                            | category.addcategory          | App\Http\Controllers\CategoryController@addCategory                         | web             |
+|        | GET|POST|HEAD | admin/category/delete-category/{id}                    | category.deletecategory       | App\Http\Controllers\CategoryController@deleteCategory                      | web             |
+|        | GET|POST|HEAD | admin/category/edit-category/{id}                      | category.editcategory         | App\Http\Controllers\CategoryController@editCategory                        | web             |
+|        | GET|HEAD      | admin/category/list-categories                         | category.viewcategory         | App\Http\Controllers\CategoryController@viewCategories                      | web             |
+|        | GET|HEAD      | admin/category/list-child-categories/{id}              | category.viewchildcategory    | App\Http\Controllers\CategoryController@viewChildCategories                 | web             |
+|        | GET|POST|HEAD | admin/category/update-status-category/{id}/{status}    | category.updatestatuscategory | App\Http\Controllers\CategoryController@updatestatusCategory                | web             |
+|        | GET|HEAD      | admin/login                                            | admin.login                   | App\Http\Controllers\Auth\AdminLoginController@showLoginForm                | web,guest:admin |
+|        | POST          | admin/login                                            | admin.login.submit            | App\Http\Controllers\Auth\AdminLoginController@login                        | web,guest:admin |
+|        | GET|HEAD      | admin/logout                                           | admin.logout                  | App\Http\Controllers\Auth\AdminLoginController@logout                       | web             |
+|        | POST          | admin/password/email                                   | admin.password.email          | App\Http\Controllers\Auth\AdminForgotPasswordController@sendResetLinkEmail  | web,guest:admin |
+|        | GET|HEAD      | admin/password/reset                                   | admin.password.request        | App\Http\Controllers\Auth\AdminForgotPasswordController@showLinkRequestForm | web,guest:admin |
+|        | POST          | admin/password/reset                                   |                               | App\Http\Controllers\Auth\AdminResetPasswordController@reset                | web,guest:admin |
+|        | GET|HEAD      | admin/password/reset/{token}                           | admin.password.reset          | App\Http\Controllers\Auth\AdminResetPasswordController@showResetForm        | web,guest:admin |
+|        | GET|POST|HEAD | admin/product/add-auction/{id}                         | auction.store                 | App\Http\Controllers\AuctionController@store                                | web             |
+|        | GET|POST|HEAD | admin/product/add-product                              | product.addproduct            | App\Http\Controllers\ProductsController@addProduct                          | web             |
+|        | GET|POST|HEAD | admin/product/add-product-image/{id}                   | product.addproductimage       | App\Http\Controllers\ProductImageController@store                           | web             |
+|        | GET|HEAD      | admin/product/auction-listing/{id}                     | auction.index                 | App\Http\Controllers\AuctionController@index                                | web             |
+|        | GET|POST|HEAD | admin/product/delete-auction/{id}                      | auction.destroy               | App\Http\Controllers\AuctionController@destroy                              | web             |
+|        | GET|POST|HEAD | admin/product/delete-product-image/{id}                | product.deleteproductimage    | App\Http\Controllers\ProductImageController@destroy                         | web             |
+|        | GET|POST|HEAD | admin/product/delete-product/{id}                      | product.deleteproduct         | App\Http\Controllers\ProductsController@deleteProduct                       | web             |
+|        | GET|POST|HEAD | admin/product/edit-auction/{auction_id}                | auction.update                | App\Http\Controllers\AuctionController@update                               | web             |
+|        | GET|POST|HEAD | admin/product/edit-product/{id}                        | product.editproduct           | App\Http\Controllers\ProductsController@editProduct                         | web             |
+|        | GET|HEAD      | admin/product/product-image-listing/{id}               | product.viewproductimage      | App\Http\Controllers\ProductImageController@index                           | web             |
+|        | GET|HEAD      | admin/product/product-listing                          | product.viewproduct           | App\Http\Controllers\ProductsController@viewProducts                        | web             |
+|        | GET|POST|HEAD | admin/product/update-status-product/{id}/{status}      | product.updatestatusproduct   | App\Http\Controllers\ProductsController@updatestatusProduct                 | web             |
+|        | GET|POST|HEAD | admin/updatepassword                                   | admin.updatepassword          | App\Http\Controllers\AdminController@updatepassword                         | web,auth:admin  |
+|        | POST          | admin/users/add-autobidder                             | autobidder.store              | App\Http\Controllers\AutoBidderController@store                             | web             |
+|        | GET|HEAD      | admin/users/add-autobidder                             | autobidder.create             | App\Http\Controllers\AutoBidderController@create                            | web             |
+|        | GET|HEAD      | admin/users/autobidder-listing                         | autobidder.index              | App\Http\Controllers\AutoBidderController@index                             | web             |
+|        | GET|HEAD      | admin/users/delete-autobidder/{autobidder_id}          | autobidder.destroy            | App\Http\Controllers\AutoBidderController@destroy                           | web             |
+|        | POST          | admin/users/edit-autobidder/{autobidder_id}            | autobidder.update             | App\Http\Controllers\AutoBidderController@update                            | web             |
+|        | GET|HEAD      | admin/users/edit-autobidder/{autobidder_id}            | autobidder.edit               | App\Http\Controllers\AutoBidderController@edit                              | web             |
+|        | GET|HEAD      | api/user                                               |                               | Closure                                                                     | api,auth:api    |
+|        | GET|HEAD      | home                                                   | home                          | App\Http\Controllers\HomeController@index                                   | web,auth        |
+|        | POST          | login                                                  |                               | App\Http\Controllers\Auth\LoginController@login                             | web,guest       |
+|        | GET|HEAD      | login                                                  | login                         | App\Http\Controllers\Auth\LoginController@showLoginForm                     | web,guest       |
+|        | POST          | logout                                                 | logout                        | App\Http\Controllers\Auth\LoginController@logout                            | web             |
+|        | POST          | password/email                                         | password.email                | App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail       | web,guest       |
+|        | POST          | password/reset                                         |                               | App\Http\Controllers\Auth\ResetPasswordController@reset                     | web,guest       |
+|        | GET|HEAD      | password/reset                                         | password.request              | App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm      | web,guest       |
+|        | GET|HEAD      | password/reset/{token}                                 | password.reset                | App\Http\Controllers\Auth\ResetPasswordController@showResetForm             | web,guest       |
+|        | POST          | register                                               |                               | App\Http\Controllers\Auth\RegisterController@register                       | web,guest       |
+|        | GET|HEAD      | register                                               | register                      | App\Http\Controllers\Auth\RegisterController@showRegistrationForm           | web,guest       |
+|        | GET|HEAD      | users/logout                                           | user.logout                   | App\Http\Controllers\Auth\LoginController@userLogout                        | web             |
++--------+---------------+--------------------------------------------------------+-------------------------------+-----------------------------------------------------------------------------+-----------------+
+
+D:\xampp\htdocs\poxaapp>php artisan r:l
+PHP Warning:  Uncaught ErrorException: Array to string conversion in D:\xampp\htdocs\poxaapp\vendor\laravel\framework\src\Illuminate\Routing\Router.php:400
+Stack trace:
+#0 D:\xampp\htdocs\poxaapp\vendor\laravel\framework\src\Illuminate\Routing\Router.php(400): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(8, 'Array to string...', 'D:\\xampp\\htdocs...', 400, Array)
+#1 D:\xampp\htdocs\poxaapp\vendor\laravel\framework\src\Illuminate\Routing\Router.php(400): require()
+#2 D:\xampp\htdocs\poxaapp\vendor\laravel\framework\src\Illuminate\Routing\Router.php(356): Illuminate\Routing\Router->loadRoutes(Array)
+#3 D:\xampp\htdocs\poxaapp\vendor\laravel\framework\src\Illuminate\Routing\RouteRegistrar.php(121): Illuminate\Routing\Router->group(Array, Array)
+#4 D:\xampp\htdocs\poxaapp\routes\web.php(82): Illuminate\Routing\RouteRegistrar->group(Array, Object(Closure))
+#5 D:\xampp\htdocs\poxaapp\vendor\laravel\framework\src\Illuminate\Routing\Router.php(400): require('D:\\xampp\\htdocs...')
+#6 D:\xampp\htdocs\poxaapp\vendo in D:\xampp\htdocs\poxaapp\vendor\laravel\framework\src\Illuminate\Routing\Router.php on line 400
+PHP Fatal error:  Illuminate\Routing\Router::loadRoutes(): Failed opening required 'Array' (include_path='\xampp\php\PEAR') in D:\xampp\htdocs\poxaapp\vendor\laravel\framework\src\Illuminate\Routing\Router.php on line 400
+
+In Router.php line 400:
+
+  Illuminate\Routing\Router::loadRoutes(): Failed opening required 'Array' (include_path='\xampp\php\PEAR')
+
+
+
+D:\xampp\htdocs\poxaapp>php artisan r:l
+PHP Warning:  Uncaught ErrorException: Array to string conversion in D:\xampp\htdocs\poxaapp\vendor\laravel\framework\src\Illuminate\Routing\Router.php:400
+Stack trace:
+#0 D:\xampp\htdocs\poxaapp\vendor\laravel\framework\src\Illuminate\Routing\Router.php(400): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(8, 'Array to string...', 'D:\\xampp\\htdocs...', 400, Array)
+#1 D:\xampp\htdocs\poxaapp\vendor\laravel\framework\src\Illuminate\Routing\Router.php(400): require()
+#2 D:\xampp\htdocs\poxaapp\vendor\laravel\framework\src\Illuminate\Routing\Router.php(356): Illuminate\Routing\Router->loadRoutes(Array)
+#3 D:\xampp\htdocs\poxaapp\vendor\laravel\framework\src\Illuminate\Routing\RouteRegistrar.php(121): Illuminate\Routing\Router->group(Array, Array)
+#4 D:\xampp\htdocs\poxaapp\routes\web.php(82): Illuminate\Routing\RouteRegistrar->group(Array, Object(Closure))
+#5 D:\xampp\htdocs\poxaapp\vendor\laravel\framework\src\Illuminate\Routing\Router.php(400): require('D:\\xampp\\htdocs...')
+#6 D:\xampp\htdocs\poxaapp\vendo in D:\xampp\htdocs\poxaapp\vendor\laravel\framework\src\Illuminate\Routing\Router.php on line 400
+PHP Fatal error:  Illuminate\Routing\Router::loadRoutes(): Failed opening required 'Array' (include_path='\xampp\php\PEAR') in D:\xampp\htdocs\poxaapp\vendor\laravel\framework\src\Illuminate\Routing\Router.php on line 400
+
+In Router.php line 400:
+
+  Illuminate\Routing\Router::loadRoutes(): Failed opening required 'Array' (include_path='\xampp\php\PEAR')
+
+
+
+D:\xampp\htdocs\poxaapp>php artisan r:l
+PHP Warning:  Uncaught ErrorException: Array to string conversion in D:\xampp\htdocs\poxaapp\vendor\laravel\framework\src\Illuminate\Routing\Router.php:400
+Stack trace:
+#0 D:\xampp\htdocs\poxaapp\vendor\laravel\framework\src\Illuminate\Routing\Router.php(400): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(8, 'Array to string...', 'D:\\xampp\\htdocs...', 400, Array)
+#1 D:\xampp\htdocs\poxaapp\vendor\laravel\framework\src\Illuminate\Routing\Router.php(400): require()
+#2 D:\xampp\htdocs\poxaapp\vendor\laravel\framework\src\Illuminate\Routing\Router.php(356): Illuminate\Routing\Router->loadRoutes(Array)
+#3 D:\xampp\htdocs\poxaapp\vendor\laravel\framework\src\Illuminate\Routing\RouteRegistrar.php(121): Illuminate\Routing\Router->group(Array, Array)
+#4 D:\xampp\htdocs\poxaapp\routes\web.php(82): Illuminate\Routing\RouteRegistrar->group(Array, Object(Closure))
+#5 D:\xampp\htdocs\poxaapp\vendor\laravel\framework\src\Illuminate\Routing\Router.php(400): require('D:\\xampp\\htdocs...')
+#6 D:\xampp\htdocs\poxaapp\vendo in D:\xampp\htdocs\poxaapp\vendor\laravel\framework\src\Illuminate\Routing\Router.php on line 400
+PHP Fatal error:  Illuminate\Routing\Router::loadRoutes(): Failed opening required 'Array' (include_path='\xampp\php\PEAR') in D:\xampp\htdocs\poxaapp\vendor\laravel\framework\src\Illuminate\Routing\Router.php on line 400
+
+In Router.php line 400:
+
+  Illuminate\Routing\Router::loadRoutes(): Failed opening required 'Array' (include_path='\xampp\php\PEAR')
+
+
+
+D:\xampp\htdocs\poxaapp>php artisan r:l
++--------+---------------+--------------------------------------------------------+-------------------------------+-----------------------------------------------------------------------------+-----------------+
+| Domain | Method        | URI                                                    | Name                          | Action                                                                      | Middleware      |
++--------+---------------+--------------------------------------------------------+-------------------------------+-----------------------------------------------------------------------------+-----------------+
+|        | GET|HEAD      | /                                                      |                               | Closure                                                                     | web             |
+|        | GET|HEAD      | admin                                                  | admin.dashboard               | App\Http\Controllers\AdminController@index                                  | web,auth:admin  |
+|        | GET|POST|HEAD | admin/auction/auction-winner/{product_id}/{auction_id} | auction.bidlistingByProduct   | App\Http\Controllers\AuctionController@winner                               | web             |
+|        | GET|POST|HEAD | admin/auction/bid-listing                              | auction.bidlisting            | App\Http\Controllers\AuctionController@bidListing                           | web             |
+|        | GET|HEAD      | admin/auction/live-auction-listing                     | auction.live_acuction         | App\Http\Controllers\AuctionController@liveAuctions                         | web             |
+|        | GET|HEAD      | admin/auction/upcoming-auction-listing                 | auction.up_coming_acuction    | App\Http\Controllers\AuctionController@upComingAuctions                     | web             |
+|        | GET|HEAD      | admin/auction/won-auction-listing                      | auction.won_acuction          | App\Http\Controllers\AuctionController@wonAuctions                          | web             |
+|        | GET|POST|HEAD | admin/category/add-category                            | category.addcategory          | App\Http\Controllers\CategoryController@addCategory                         | web             |
+|        | GET|POST|HEAD | admin/category/delete-category/{id}                    | category.deletecategory       | App\Http\Controllers\CategoryController@deleteCategory                      | web             |
+|        | GET|POST|HEAD | admin/category/edit-category/{id}                      | category.editcategory         | App\Http\Controllers\CategoryController@editCategory                        | web             |
+|        | GET|HEAD      | admin/category/list-categories                         | category.viewcategory         | App\Http\Controllers\CategoryController@viewCategories                      | web             |
+|        | GET|HEAD      | admin/category/list-child-categories/{id}              | category.viewchildcategory    | App\Http\Controllers\CategoryController@viewChildCategories                 | web             |
+|        | GET|POST|HEAD | admin/category/update-status-category/{id}/{status}    | category.updatestatuscategory | App\Http\Controllers\CategoryController@updatestatusCategory                | web             |
+|        | GET|HEAD      | admin/login                                            | admin.login                   | App\Http\Controllers\Auth\AdminLoginController@showLoginForm                | web,guest:admin |
+|        | POST          | admin/login                                            | admin.login.submit            | App\Http\Controllers\Auth\AdminLoginController@login                        | web,guest:admin |
+|        | GET|HEAD      | admin/logout                                           | admin.logout                  | App\Http\Controllers\Auth\AdminLoginController@logout                       | web             |
+|        | POST          | admin/password/email                                   | admin.password.email          | App\Http\Controllers\Auth\AdminForgotPasswordController@sendResetLinkEmail  | web,guest:admin |
+|        | GET|HEAD      | admin/password/reset                                   | admin.password.request        | App\Http\Controllers\Auth\AdminForgotPasswordController@showLinkRequestForm | web,guest:admin |
+|        | POST          | admin/password/reset                                   |                               | App\Http\Controllers\Auth\AdminResetPasswordController@reset                | web,guest:admin |
+|        | GET|HEAD      | admin/password/reset/{token}                           | admin.password.reset          | App\Http\Controllers\Auth\AdminResetPasswordController@showResetForm        | web,guest:admin |
+|        | GET|POST|HEAD | admin/product/add-auction/{id}                         | auction.store                 | App\Http\Controllers\AuctionController@store                                | web             |
+|        | GET|POST|HEAD | admin/product/add-product                              | product.addproduct            | App\Http\Controllers\ProductsController@addProduct                          | web             |
+|        | GET|POST|HEAD | admin/product/add-product-image/{id}                   | product.addproductimage       | App\Http\Controllers\ProductImageController@store                           | web             |
+|        | GET|HEAD      | admin/product/auction-listing/{id}                     | auction.index                 | App\Http\Controllers\AuctionController@index                                | web             |
+|        | GET|POST|HEAD | admin/product/delete-auction/{id}                      | auction.destroy               | App\Http\Controllers\AuctionController@destroy                              | web             |
+|        | GET|POST|HEAD | admin/product/delete-product-image/{id}                | product.deleteproductimage    | App\Http\Controllers\ProductImageController@destroy                         | web             |
+|        | GET|POST|HEAD | admin/product/delete-product/{id}                      | product.deleteproduct         | App\Http\Controllers\ProductsController@deleteProduct                       | web             |
+|        | GET|POST|HEAD | admin/product/edit-auction/{auction_id}                | auction.update                | App\Http\Controllers\AuctionController@update                               | web             |
+|        | GET|POST|HEAD | admin/product/edit-product/{id}                        | product.editproduct           | App\Http\Controllers\ProductsController@editProduct                         | web             |
+|        | GET|HEAD      | admin/product/product-image-listing/{id}               | product.viewproductimage      | App\Http\Controllers\ProductImageController@index                           | web             |
+|        | GET|HEAD      | admin/product/product-listing                          | product.viewproduct           | App\Http\Controllers\ProductsController@viewProducts                        | web             |
+|        | GET|POST|HEAD | admin/product/update-status-product/{id}/{status}      | product.updatestatusproduct   | App\Http\Controllers\ProductsController@updatestatusProduct                 | web             |
+|        | GET|POST|HEAD | admin/updatepassword                                   | admin.updatepassword          | App\Http\Controllers\AdminController@updatepassword                         | web,auth:admin  |
+|        | POST          | admin/users/add-autobidder                             | autobidder.store              | App\Http\Controllers\AutoBidderController@store                             | web             |
+|        | GET|HEAD      | admin/users/add-autobidder                             | autobidder.create             | App\Http\Controllers\AutoBidderController@create                            | web             |
+|        | GET|HEAD      | admin/users/autobidder-listing                         | autobidder.index              | App\Http\Controllers\AutoBidderController@index                             | web             |
+|        | GET|HEAD      | admin/users/delete-autobidder/{autobidder_id}          | autobidder.destroy            | App\Http\Controllers\AutoBidderController@destroy                           | web             |
+|        | POST          | admin/users/edit-autobidder/{autobidder_id}            | autobidder.update             | App\Http\Controllers\AutoBidderController@update                            | web             |
+|        | GET|HEAD      | admin/users/edit-autobidder/{autobidder_id}            | autobidder.edit               | App\Http\Controllers\AutoBidderController@edit                              | web             |
+|        | GET|HEAD      | api/user                                               |                               | Closure                                                                     | api,auth:api    |
+|        | GET|HEAD      | home                                                   | home                          | App\Http\Controllers\HomeController@index                                   | web,auth        |
+|        | POST          | login                                                  |                               | App\Http\Controllers\Auth\LoginController@login                             | web,guest       |
+|        | GET|HEAD      | login                                                  | login                         | App\Http\Controllers\Auth\LoginController@showLoginForm                     | web,guest       |
+|        | POST          | logout                                                 | logout                        | App\Http\Controllers\Auth\LoginController@logout                            | web             |
+|        | POST          | password/email                                         | password.email                | App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail       | web,guest       |
+|        | POST          | password/reset                                         |                               | App\Http\Controllers\Auth\ResetPasswordController@reset                     | web,guest       |
+|        | GET|HEAD      | password/reset                                         | password.request              | App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm      | web,guest       |
+|        | GET|HEAD      | password/reset/{token}                                 | password.reset                | App\Http\Controllers\Auth\ResetPasswordController@showResetForm             | web,guest       |
+|        | POST          | register                                               |                               | App\Http\Controllers\Auth\RegisterController@register                       | web,guest       |
+|        | GET|HEAD      | register                                               | register                      | App\Http\Controllers\Auth\RegisterController@showRegistrationForm           | web,guest       |
+|        | GET|HEAD      | users/logout                                           | user.logout                   | App\Http\Controllers\Auth\LoginController@userLogout                        | web             |
++--------+---------------+--------------------------------------------------------+-------------------------------+-----------------------------------------------------------------------------+-----------------+
+
+D:\xampp\htdocs\poxaapp>php artisan r:l
++--------+---------------+--------------------------------------------------------+-------------------------------+-----------------------------------------------------------------------------+-----------------+
+| Domain | Method        | URI                                                    | Name                          | Action                                                                      | Middleware      |
++--------+---------------+--------------------------------------------------------+-------------------------------+-----------------------------------------------------------------------------+-----------------+
+|        | GET|HEAD      | /                                                      |                               | Closure                                                                     | web             |
+|        | GET|HEAD      | admin                                                  | admin.dashboard               | App\Http\Controllers\AdminController@index                                  | web,auth:admin  |
+|        | GET|POST|HEAD | admin/auction/auction-winner/{product_id}/{auction_id} | auction.bidlistingByProduct   | App\Http\Controllers\AuctionController@winner                               | web,auth:admin  |
+|        | GET|POST|HEAD | admin/auction/bid-listing                              | auction.bidlisting            | App\Http\Controllers\AuctionController@bidListing                           | web,auth:admin  |
+|        | GET|HEAD      | admin/auction/live-auction-listing                     | auction.live_acuction         | App\Http\Controllers\AuctionController@liveAuctions                         | web,auth:admin  |
+|        | GET|HEAD      | admin/auction/upcoming-auction-listing                 | auction.up_coming_acuction    | App\Http\Controllers\AuctionController@upComingAuctions                     | web,auth:admin  |
+|        | GET|HEAD      | admin/auction/won-auction-listing                      | auction.won_acuction          | App\Http\Controllers\AuctionController@wonAuctions                          | web,auth:admin  |
+|        | GET|POST|HEAD | admin/category/add-category                            | category.addcategory          | App\Http\Controllers\CategoryController@addCategory                         | web,auth:admin  |
+|        | GET|POST|HEAD | admin/category/delete-category/{id}                    | category.deletecategory       | App\Http\Controllers\CategoryController@deleteCategory                      | web,auth:admin  |
+|        | GET|POST|HEAD | admin/category/edit-category/{id}                      | category.editcategory         | App\Http\Controllers\CategoryController@editCategory                        | web,auth:admin  |
+|        | GET|HEAD      | admin/category/list-categories                         | category.viewcategory         | App\Http\Controllers\CategoryController@viewCategories                      | web,auth:admin  |
+|        | GET|HEAD      | admin/category/list-child-categories/{id}              | category.viewchildcategory    | App\Http\Controllers\CategoryController@viewChildCategories                 | web,auth:admin  |
+|        | GET|POST|HEAD | admin/category/update-status-category/{id}/{status}    | category.updatestatuscategory | App\Http\Controllers\CategoryController@updatestatusCategory                | web,auth:admin  |
+|        | GET|HEAD      | admin/login                                            | admin.login                   | App\Http\Controllers\Auth\AdminLoginController@showLoginForm                | web,guest:admin |
+|        | POST          | admin/login                                            | admin.login.submit            | App\Http\Controllers\Auth\AdminLoginController@login                        | web,guest:admin |
+|        | GET|HEAD      | admin/logout                                           | admin.logout                  | App\Http\Controllers\Auth\AdminLoginController@logout                       | web             |
+|        | POST          | admin/password/email                                   | admin.password.email          | App\Http\Controllers\Auth\AdminForgotPasswordController@sendResetLinkEmail  | web,guest:admin |
+|        | GET|HEAD      | admin/password/reset                                   | admin.password.request        | App\Http\Controllers\Auth\AdminForgotPasswordController@showLinkRequestForm | web,guest:admin |
+|        | POST          | admin/password/reset                                   |                               | App\Http\Controllers\Auth\AdminResetPasswordController@reset                | web,guest:admin |
+|        | GET|HEAD      | admin/password/reset/{token}                           | admin.password.reset          | App\Http\Controllers\Auth\AdminResetPasswordController@showResetForm        | web,guest:admin |
+|        | GET|POST|HEAD | admin/product/add-auction/{id}                         | auction.store                 | App\Http\Controllers\AuctionController@store                                | web,auth:admin  |
+|        | GET|POST|HEAD | admin/product/add-product                              | product.addproduct            | App\Http\Controllers\ProductsController@addProduct                          | web,auth:admin  |
+|        | GET|POST|HEAD | admin/product/add-product-image/{id}                   | product.addproductimage       | App\Http\Controllers\ProductImageController@store                           | web,auth:admin  |
+|        | GET|HEAD      | admin/product/auction-listing/{id}                     | auction.index                 | App\Http\Controllers\AuctionController@index                                | web,auth:admin  |
+|        | GET|POST|HEAD | admin/product/delete-auction/{id}                      | auction.destroy               | App\Http\Controllers\AuctionController@destroy                              | web,auth:admin  |
+|        | GET|POST|HEAD | admin/product/delete-product-image/{id}                | product.deleteproductimage    | App\Http\Controllers\ProductImageController@destroy                         | web,auth:admin  |
+|        | GET|POST|HEAD | admin/product/delete-product/{id}                      | product.deleteproduct         | App\Http\Controllers\ProductsController@deleteProduct                       | web,auth:admin  |
+|        | GET|POST|HEAD | admin/product/edit-auction/{auction_id}                | auction.update                | App\Http\Controllers\AuctionController@update                               | web,auth:admin  |
+|        | GET|POST|HEAD | admin/product/edit-product/{id}                        | product.editproduct           | App\Http\Controllers\ProductsController@editProduct                         | web,auth:admin  |
+|        | GET|HEAD      | admin/product/product-image-listing/{id}               | product.viewproductimage      | App\Http\Controllers\ProductImageController@index                           | web,auth:admin  |
+|        | GET|HEAD      | admin/product/product-listing                          | product.viewproduct           | App\Http\Controllers\ProductsController@viewProducts                        | web,auth:admin  |
+|        | GET|POST|HEAD | admin/product/update-status-product/{id}/{status}      | product.updatestatusproduct   | App\Http\Controllers\ProductsController@updatestatusProduct                 | web,auth:admin  |
+|        | GET|POST|HEAD | admin/updatepassword                                   | admin.updatepassword          | App\Http\Controllers\AdminController@updatepassword                         | web,auth:admin  |
+|        | POST          | admin/users/add-autobidder                             | autobidder.store              | App\Http\Controllers\AutoBidderController@store                             | web,auth:admin  |
+|        | GET|HEAD      | admin/users/add-autobidder                             | autobidder.create             | App\Http\Controllers\AutoBidderController@create                            | web,auth:admin  |
+|        | GET|HEAD      | admin/users/autobidder-listing                         | autobidder.index              | App\Http\Controllers\AutoBidderController@index                             | web,auth:admin  |
+|        | GET|HEAD      | admin/users/delete-autobidder/{autobidder_id}          | autobidder.destroy            | App\Http\Controllers\AutoBidderController@destroy                           | web,auth:admin  |
+|        | POST          | admin/users/edit-autobidder/{autobidder_id}            | autobidder.update             | App\Http\Controllers\AutoBidderController@update                            | web,auth:admin  |
+|        | GET|HEAD      | admin/users/edit-autobidder/{autobidder_id}            | autobidder.edit               | App\Http\Controllers\AutoBidderController@edit                              | web,auth:admin  |
+|        | GET|HEAD      | api/user                                               |                               | Closure                                                                     | api,auth:api    |
+|        | GET|HEAD      | home                                                   | home                          | App\Http\Controllers\HomeController@index                                   | web,auth        |
+|        | POST          | login                                                  |                               | App\Http\Controllers\Auth\LoginController@login                             | web,guest       |
+|        | GET|HEAD      | login                                                  | login                         | App\Http\Controllers\Auth\LoginController@showLoginForm                     | web,guest       |
+|        | POST          | logout                                                 | logout                        | App\Http\Controllers\Auth\LoginController@logout                            | web             |
+|        | POST          | password/email                                         | password.email                | App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail       | web,guest       |
+|        | POST          | password/reset                                         |                               | App\Http\Controllers\Auth\ResetPasswordController@reset                     | web,guest       |
+|        | GET|HEAD      | password/reset                                         | password.request              | App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm      | web,guest       |
+|        | GET|HEAD      | password/reset/{token}                                 | password.reset                | App\Http\Controllers\Auth\ResetPasswordController@showResetForm             | web,guest       |
+|        | POST          | register                                               |                               | App\Http\Controllers\Auth\RegisterController@register                       | web,guest       |
+|        | GET|HEAD      | register                                               | register                      | App\Http\Controllers\Auth\RegisterController@showRegistrationForm           | web,guest       |
+|        | GET|HEAD      | users/logout                                           | user.logout                   | App\Http\Controllers\Auth\LoginController@userLogout                        | web             |
++--------+---------------+--------------------------------------------------------+-------------------------------+-----------------------------------------------------------------------------+-----------------+
+
+D:\xampp\htdocs\poxaapp>

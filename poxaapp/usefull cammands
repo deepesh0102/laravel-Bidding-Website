@@ -1,0 +1,62 @@
+//print query log in laravel
+
+$query = DB::getQueryLog();
+print_r($query);
+
+
+
+Query Error reported on page /admin/export_order.php MySQL error: 1064 - 
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 
+'FROM auctions a LEFT JOIN products p on p.id = a.product_id LEFT JOI' at line 2 SELECT a.id as aid, a.end_time,p.title, p.rrp ,a.price,u.username,u.first_name,u.last_name,s.name,ad.name,ad.address_1,ad.address_2,ad.suburb,ad.city, ad.postcode,ad.phone, FROM auctions a LEFT JOIN products p on p.id = a.product_id LEFT JOIN users u on u.id = a.winner_id LEFT JOIN addresses ad on ad.user_id = a.winner_id AND ad.user_address_type_id = '2' LEFT JOIN statuses s on s.id = a.status_id WHERE a.closed = '1' AND a.winner_id != '0' ORDER BY a.end_time ASC
+
+
+Query Error reported on page /admin/auction_action.php MySQL error: 1366 - Incorrect integer value: '' for column 'active' at row 1 
+UPDATE auctions SET 
+start_time='2018-11-13 19:50:04', 
+end_time='2019-11-13 19:50:04', 
+price_inc='1.00', 
+time_inc='20', 
+autolist='0', 
+featured='0', 
+nail_bitter='0', 
+is_ebay = '0', 
+is_unique = '0', 
+penny='0', 
+free='0', 
+beginner='0', 
+reverse='0', 
+active='', 
+hot='0', 
+min_real_bids='20', 
+autobid_limit='10', 
+modified='2018-11-13 19:58:07' 
+WHERE id='269209'
+
+
+php artisan make:migration create_users_table --create=users
+php artisan migrate
+
+php artisan make:controller PhotoController --resource --model=Photo
+
+php artisan make:controller BiddingPackageController --resource --model=BiddingPackage
+
+php artisan make:controller UsersController --resource 
+php artisan make:controller SellersController --resource --model=BiddingPackage
+
+
+D:\xampp\htdocs\poxaapp>php artisan make:model -a seller
+
+php artisan route:clear 
+
+//add column to table 
+php artisan make:migration add_votes_to_users_table --table=users
+
+
+
+UPDATE packages SET name='30 Bid Pak',bids='30',price='18.00',points='8', modified='2018-11-16 19:05:54' WHERE id=10
+
+INSERT INTO sources (name,extra) VALUES('DSsd','1')
+
+print Last query Log
+//        $query = DB::getQueryLog();
+//        print_r($query);

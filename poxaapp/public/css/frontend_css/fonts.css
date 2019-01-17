@@ -1,0 +1,27 @@
+@font-face {
+    font-family: 'FRABK_0';
+    src: url('../../fonts/frontend_fonts//FRABK_0.eot');
+    src: url('../../fonts/frontend_fonts//FRABK_0.eot') format('embedded-opentype'),
+         url('../../fonts/frontend_fonts//FRABK_0.woff2') format('woff2'),
+         url('../../fonts/frontend_fonts//FRABK_0.woff') format('woff'),
+         url('../../fonts/frontend_fonts//FRABK_0.ttf') format('truetype'),
+         url('../../fonts/frontend_fonts//FRABK_0.svg#FRABK_0') format('svg');
+}
+@font-face {
+    font-family: 'FRADM_0';
+    src: url('../../fonts/frontend_fonts//FRADM_0.eot');
+    src: url('../../fonts/frontend_fonts//FRADM_0.eot') format('embedded-opentype'),
+         url('../../fonts/frontend_fonts//FRADM_0.woff2') format('woff2'),
+         url('../../fonts/frontend_fonts//FRADM_0.woff') format('woff'),
+         url('../../fonts/frontend_fonts//FRADM_0.ttf') format('truetype'),
+         url('../../fonts/frontend_fonts//FRADM_0.svg#FRADM_0') format('svg');
+}
+@font-face {
+    font-family: 'FRAHV_0';
+    src: url('../../fonts/frontend_fonts//FRAHV_0.eot');
+    src: url('../../fonts/frontend_fonts//FRAHV_0.eot') format('embedded-opentype'),
+         url('../../fonts/frontend_fonts//FRAHV_0.woff2') format('woff2'),
+         url('../../fonts/frontend_fonts//FRAHV_0.woff') format('woff'),
+         url('../../fonts/frontend_fonts//FRAHV_0.ttf') format('truetype'),
+         url('../../fonts/frontend_fonts//FRAHV_0.svg#FRAHV_0') format('svg');
+}

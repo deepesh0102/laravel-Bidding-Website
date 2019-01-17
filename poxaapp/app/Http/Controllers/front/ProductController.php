@@ -1,0 +1,338 @@
+<?php
+
+namespace App\Http\Controllers\front;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\URL;
+use Session;
+use Image;
+use App\Category;
+use App\Product;
+use App\bidingHistories;
+use Config;
+use DB;
+use Log;
+use DateTime;
+
+class ProductController extends Controller
+{
+
+
+
+    /**
+     * List all the products
+     *
+     * @param string $order
+     * @param string $sort
+     * @param array $columns
+     * @return Collection
+     */
+    public function listProducts(int $limit=null)
+    {
+
+
+        //        $products =Product::has('auctions')->get()->take($limit);
+        $products =Product::whereHas('auctions', function ($query) {
+            $query->where([['auctions.is_sold', '=', 0], ['auctions.is_expired', '=', 1]]);
+        })->where(['is_delete' => 1])->get()->take($limit);
+
+
+
+
+        foreach($products as $s){
+
+            $s->load(['productImages' => function($q){ return $q->where([ 'is_delete' => 1 ])->orderBy('id', 'desc')->take(1);}
+
+            ]);
+        }
+
+        return $products;
+    }
+
+
+
+    /**
+     * Display a Upcoming Product listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function upComingProduct(int $limit=null){
+
+        $current_time_stamp = new \DateTime();
+
+        $current_time_stamp = $current_time_stamp->getTimestamp();
+
+        $products =Product::whereHas('auctions', function ($query) use ($current_time_stamp){
+            $query->where([['auctions.is_sold', '=', 0], ['auctions.is_expired', '=', 1],['auctions.start_time', '>', $current_time_stamp]]);
+        })->get()->take($limit);
+
+        foreach($products as $s){
+
+            $s->load(['productImages' => function($q){ return $q->where([ 'is_delete' => 1 ])->orderBy('id', 'desc')->take(1);}
+
+            ]);
+        }
+
+        foreach($products as $s){
+
+            $s->load([
+
+                'category',
+                'bidingHistories'=> function ($query)use ($current_time_stamp){
+
+                    $query->where(['is_delete'=>1, 'status'=>1])->orderBy('id', 'DESC')->take(1);
+                },
+
+                'auctions' =>  function ($query)use ($current_time_stamp){
+
+                    //               $query->where(['is_delete'=>1, 'auction_status'=>1, ['start_time', '<', $current_time_stamp], ['is_sold', '=', 0]  ])->take(1);
+                    $query->where(['is_delete'=>1, 'auction_status'=>1, ['start_time', '>', $current_time_stamp],['is_sold', '=', 0], ['is_expired', '=', 1]  ])->orderBy('end_time', 'ASC')->take(1);
+                }
+
+            ]);
+
+            return $products;
+
+        }
+
+
+    }
+
+
+    /**
+     * Display a Sold Product listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function allSoldProduct(int $limit=null){
+
+
+        $products =Product::whereHas('auctions', function ($query) {
+            $query->where([['auctions.is_sold', '=', 1], ['auctions.is_expired', '=', 1]]);
+        })->get()->take($limit);
+
+        foreach($products as $s){
+
+            $s->load(['productImages' => function($q){ return $q->where([ 'is_delete' => 1 ])->orderBy('id', 'desc')->take(1);}
+
+            ]);
+        }
+
+        foreach($products as $s){
+
+            $s->load([
+
+                'category',
+                'bidingHistories'=> function ($query){
+
+                    $query->where(['is_delete'=>1, 'status'=>1])->orderBy('id', 'DESC')->take(1);
+                },
+
+                'auctions' =>  function ($query){
+
+                    //               $query->where(['is_delete'=>1, 'auction_status'=>1, ['start_time', '<', $current_time_stamp], ['is_sold', '=', 0]  ])->take(1);
+                    $query->where(['is_delete'=>1, 'auction_status'=>1,['is_sold', '=', 1], ['is_expired', '=', 1]  ])->orderBy('end_time', 'ASC')->take(1);
+                }
+
+            ]);
+
+            return $products;
+
+        }
+
+
+    }
+
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $current_time_stamp = new \DateTime();
+
+        $current_time_stamp = $current_time_stamp->getTimestamp();
+
+        $products =$this->listProducts();
+
+        foreach($products as $s){
+
+            $s->load([
+
+                'category',
+                'bidingHistories'=> function ($query)use ($current_time_stamp){
+
+                    $query->where(['is_delete'=>1, 'status'=>1])->orderBy('id', 'DESC')->take(1);
+                },
+
+                'auctions' =>  function ($query)use ($current_time_stamp){
+
+                    //               $query->where(['is_delete'=>1, 'auction_status'=>1, ['start_time', '<', $current_time_stamp], ['is_sold', '=', 0]  ])->take(1);
+                    $query->where(['is_delete'=>1, 'auction_status'=>1, ['start_time', '<', $current_time_stamp],['is_sold', '=', 0], ['is_expired', '=', 1]  ])->orderBy('end_time', 'ASC')->take(1);
+                }
+
+            ]);
+
+
+        }
+        //        dd($products);
+        $products_collection = $products->pluck('id')->all();
+
+        $productId = $products_collection;
+
+        //        $products = $products->attributes;
+        //       dd($productId);
+        return view('front.products.productnew_list')->with(compact('products','productId'));
+    }
+
+
+    /**
+     * Get the product
+     *
+     * @param string $slug
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+//    public function show(array $ids)
+    public function show(Request $request, $id, $slug)
+    {
+
+        $current_time_stamp = new \DateTime();
+
+        $current_time_stamp = $current_time_stamp->getTimestamp();
+        //        $product = Product::where(['slug' => $slug])->get();
+        $listproducts = $this->listProducts(3);
+        $products = Product::with([
+            'productImages' => function($query){
+
+                $query->where([ 'is_delete' => 1 ]);
+                //            $query->where( 'is_delete', '=', 1 );
+            },
+            'bidingHistories'=> function ($query)use ($current_time_stamp){
+
+                $query->where(['is_delete'=>1, 'status'=>1])->orderBy('id', 'DESC')->take(10);
+            },
+            'category',
+            'auctions' => function ($query)use ($current_time_stamp){
+
+                //               $query->where(['is_delete'=>1, 'auction_status'=>1, ['start_time', '<', $current_time_stamp], ['is_sold', '=', 0]  ])->take(1);
+                $query->where(['is_delete'=>1, 'auction_status'=>1, ['start_time', '<', $current_time_stamp],['is_sold', '=', 0], ['is_expired', '=', 1] ])->take(1);
+            }
+
+        ])->where(['id' => $id, 'slug' => $slug])->first();
+        //           ])->whereIn('id', $ids)->first();
+
+        //        dd($products);
+        $products_collection = collect($products);
+        $products_collection = $products_collection->only('id')->values()->all();
+        $productId = $products_collection;
+        //        print_r($products_collection);
+        //        dd($products_collection->items);
+
+
+
+        return view('front.products.productnew', compact('products','listproducts', 'productId'));
+    }
+
+
+
+    public function sold(Request $request, $id, $slug)
+    {
+
+        $current_time_stamp = new \DateTime();
+
+        $current_time_stamp = $current_time_stamp->getTimestamp();
+        //        $product = Product::where(['slug' => $slug])->get();
+        $listproducts = $this->listProducts(3);
+        $soldproducts = Product::with([
+            'productImages' => function($query){
+
+                $query->where([ 'is_delete' => 1 ]);
+                //            $query->where( 'is_delete', '=', 1 );
+            },
+            'bidingHistories'=> function ($query)use ($current_time_stamp){
+
+                $query->where(['is_delete'=>1, 'status'=>1])->orderBy('id', 'DESC')->take(10);
+            },
+            'category',
+            'auctions' => function ($query)use ($current_time_stamp){
+
+                //               $query->where(['is_delete'=>1, 'auction_status'=>1, ['start_time', '<', $current_time_stamp], ['is_sold', '=', 0]  ])->take(1);
+                $query->where(['is_delete'=>1, 'auction_status'=>1, ['start_time', '>', $current_time_stamp],['is_sold', '=', 0], ['is_expired', '=', 1] ])->take(1);
+            }
+
+        ])->where(['id' => $id, 'slug' => $slug])->first();
+        //           ])->whereIn('id', $ids)->first();
+
+        //        dd($products);
+
+        //        print_r($products_collection);
+        //        dd($products_collection->items);
+
+
+
+        return view('front.products.upcoming_produt', compact('soldproducts','listproducts'));
+    }
+
+
+
+
+    public function upcoming(Request $request, $id, $slug)
+    {
+
+        $current_time_stamp = new \DateTime();
+
+        $current_time_stamp = $current_time_stamp->getTimestamp();
+        //        $product = Product::where(['slug' => $slug])->get();
+        $listproducts = $this->listProducts(3);
+        $upcomingproducts = Product::with([
+            'productImages' => function($query){
+
+                $query->where([ 'is_delete' => 1 ]);
+                //            $query->where( 'is_delete', '=', 1 );
+            },
+            'bidingHistories'=> function ($query)use ($current_time_stamp){
+
+                $query->where(['is_delete'=>1, 'status'=>1])->orderBy('id', 'DESC')->take(10);
+            },
+            'category',
+            'auctions' => function ($query)use ($current_time_stamp){
+
+                //               $query->where(['is_delete'=>1, 'auction_status'=>1, ['start_time', '<', $current_time_stamp], ['is_sold', '=', 0]  ])->take(1);
+                $query->where(['is_delete'=>1, 'auction_status'=>1, ['start_time', '>', $current_time_stamp],['is_sold', '=', 0], ['is_expired', '=', 1] ])->take(1);
+            }
+
+        ])->where(['id' => $id, 'slug' => $slug])->first();
+        //           ])->whereIn('id', $ids)->first();
+
+        //        dd($products);
+
+        //        print_r($products_collection);
+        //        dd($products_collection->items);
+
+
+
+        return view('front.products.upcomingnew_product', compact('upcomingproducts','listproducts'));
+    }
+
+
+
+    /*Get all Product by category*/
+
+    public function getProductByCategory(Request $request,$category_id){
+
+
+        $productByCategory = Product::findByCategoryId($category_id)->get();
+
+        return view('product_by_category', compact($productByCategory));
+
+    }
+
+
+
+
+
+}
